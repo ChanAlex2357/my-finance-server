@@ -11,8 +11,8 @@
 ## [ ] Authentification
 
 - [ ] BDD
-  - [ ] Cree la migration create users
-  - [ ] modifier le fichier existant
+  - [x] Cree la migration create users (2)
+  - [x] modifier le fichier existant (2)
   - [ ] cree la migration create user_profiles
   - [ ] faire la migration
 - [ ] Affichage
@@ -26,6 +26,6 @@
       - [ ] formulaire de user et son profile
     - [ ] gestion d'erreur
 - [ ] Metier
-  - [ ] cree le model users
+  - [x] cree le model users (6)
   - [ ] cree le model user_profile
     - [ ] faire la liaison entre user_profiles et users
