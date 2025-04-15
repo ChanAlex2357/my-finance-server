@@ -1,2 +1,3 @@
 CREATE SEQUENCE users_id_seq START 1 INCREMENT 1;
 CREATE SEQUENCE user_profiles_id_seq START 1 INCREMENT 1;
+CREATE SEQUENCE professional_status_id_seq START 1 INCREMENT 1;
