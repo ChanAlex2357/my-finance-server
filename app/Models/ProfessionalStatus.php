@@ -10,7 +10,7 @@ class ProfessionalStatus extends Model
 {
     use HasFactory, HasCustomId;
 
-    protected $table = 'professional_status';
+    protected $table = 'professional_statuses';
     public $incrementing = false;
     protected $keyType = 'string';
 

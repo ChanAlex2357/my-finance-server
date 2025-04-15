@@ -19,3 +19,7 @@ Route::get('/', function () {
 });
 
 Route::get('/login' , [AuthController::class , 'login'])->name('auth.login');
+Route::post('/login' , [AuthController::class , 'dologin'])->name('auth.dologin');
+
+Route::get('/register',[AuthController::class, 'register'])->name('auth.register');
+Route::post('/register',[AuthController::class, 'doregister'])->name('auth.doregister');
