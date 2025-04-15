@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\LoginRequest;
 use App\Models\ProfessionalStatus;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
 
@@ -14,15 +16,23 @@ class AuthController extends Controller
     function login(){
         return view('auth.login');        
     }
+    function dologin(LoginRequest $request) {
+        $credentials = $request->validated();
+        if(Auth::attempt($credentials)){
+            $request->session()->regenerate();
+            return redirect()->intended(route('user.home'));
+        }
+
+        // return to_route('auth.login')->withErrors([
+        //     'email' => "Email invalide"
+        // ]);
+    }
 
     function register() {
         $status = ProfessionalStatus::all();
         return view('auth.register',[ 'status'  => $status]);
     }
 
-    function dologin() {
-        
-    }
 
     function doregister(Request $request){
         $user = User::create([

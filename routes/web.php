@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,3 +24,7 @@ Route::post('/login' , [AuthController::class , 'dologin'])->name('auth.dologin'
 
 Route::get('/register',[AuthController::class, 'register'])->name('auth.register');
 Route::post('/register',[AuthController::class, 'doregister'])->name('auth.doregister');
+
+
+# User routes
+Route::get('/user/home' , [HomeController::class,'index'])->name('user.home');

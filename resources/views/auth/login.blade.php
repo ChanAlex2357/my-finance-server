@@ -5,6 +5,7 @@
     <div class="card">
         <div class="card-body">
             <form action="{{ route('auth.login') }}" method="post" class="vstack gap-3">
+                @csrf
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}">
