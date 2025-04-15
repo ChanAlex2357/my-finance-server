@@ -14,7 +14,7 @@ class CreateProfessionalStatusesTable extends Migration
     public function up()
     {
         Schema::create('professional_statuses', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
             $table->string('val')->unique();
             $table->string('desce')->nullable();
             $table->timestamps();
