@@ -23,9 +23,9 @@ class AuthController extends Controller
             return redirect()->intended(route('user.home'));
         }
 
-        // return to_route('auth.login')->withErrors([
-        //     'email' => "Email invalide"
-        // ]);
+        return redirect()->route('auth.login')->withErrors([
+            'email' => "Email invalide ou Mode de passe incorecte"
+        ]);
     }
 
     function register() {
