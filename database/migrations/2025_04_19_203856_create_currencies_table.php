@@ -14,8 +14,11 @@ class CreateCurrenciesTable extends Migration
     public function up()
     {
         Schema::create('currencies', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
+            $table->string('val')->notNullable();
+            $table->string('desce')->nullable();
             $table->timestamps();
+            $table->softDeletes(); // Add deleted_at column
         });
     }
 

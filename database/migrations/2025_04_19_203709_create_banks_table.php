@@ -14,8 +14,10 @@ class CreateBanksTable extends Migration
     public function up()
     {
         Schema::create('banks', function (Blueprint $table) {
-            $table->id();
+            $table->string('id')->primary();
+            $table->string('name')->notNullable();
             $table->timestamps();
+            $table->softDeletes(); // Add deleted_at column
         });
     }
 

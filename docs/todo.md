@@ -32,39 +32,39 @@
 
 ## [ ] Creation de caisse (Account)
 
-- [ ] Creation Bank<!-- Type de caisse : mobile money , physique , caisse , tirelir , banque -->
-  - [ ] generer le model et la migration
-  - [ ] modifier la structure de la migration
-  - [ ] modifier model
-    - [ ] ajouter HasCustomId
-- [ ] Creation currency
-  - [ ] generer le model et la migration
-  - [ ] modifier la structure de la migration
-  - [ ] modifier model
-    - [ ] ajouter HasCustomId
-- [ ] Creation de account
-  - [ ] generer le model et la migration
-  - [ ] modifier la structure de la migration
-  - [ ] modifier le model
-    - [ ] ajouter HasCustomId
-    - [ ] rajouter relations
-      - [ ] currency
-      - [ ] bank
-      - [ ] user
-- [ ] Creation de account_info
-  - [ ] generer le moddel et la migration
-  - [ ] modifier la migration
-  - [ ] modifier le model
-    - [ ] ajouter HasCustomId
-    - [ ] rajouter relations
-      - [ ] account
-- [ ] Creation de cash_report
-  - [ ] generer le model et la migration
-  - [ ] modifier la migration
-  - [ ] modifier le model
-    - [ ] ajouter HasCustomId
-    - [ ] rajouter les relations
-      - [ ] account
+- [x] Creation Bank<!-- Type de caisse : mobile money , physique , caisse , tirelir , banque -->
+  - [x] generer le model et la migration
+  - [x] modifier la structure de la migration
+  - [x] modifier model
+    - [x] ajouter HasCustomId
+- [x] Creation currency
+  - [x] generer le model et la migration
+  - [x] modifier la structure de la migration
+  - [x] modifier model
+    - [x] ajouter HasCustomId
+- [x] Creation de account
+  - [x] generer le model et la migration
+  - [x] modifier la structure de la migration
+  - [x] modifier le model
+    - [x] ajouter HasCustomId
+    - [x] rajouter relations
+      - [x] currency
+      - [x] bank
+      - [x] user
+- [x] Creation de account_info
+  - [x] generer le moddel et la migration
+  - [x] modifier la migration
+  - [x] modifier le model
+    - [x] ajouter HasCustomId
+    - [x] rajouter relations
+      - [x] account
+- [x] Creation de cash_report
+  - [x] generer le model et la migration
+  - [x] modifier la migration
+  - [x] modifier le model
+    - [x] ajouter HasCustomId
+    - [x] rajouter les relations
+      - [x] account
 - [ ] Insertion account
   - [ ] Affichage
     - [ ] Cree le controller
