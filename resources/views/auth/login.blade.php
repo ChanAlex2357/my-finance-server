@@ -1,7 +1,7 @@
 @extends("layouts.base")
 
 @section("content")
-    <h1>Se connecter</h1>
+    <h2>My Finance</h2>
     <div class="card">
         <div class="card-body">
             <form action="{{ route('auth.login') }}" method="post" class="vstack gap-3">
@@ -23,7 +23,11 @@
                 <div class="form-group">
                     <input type="submit" value="se connecter">
                 </div>
-        </form>
+            </form>
+        </div>
+        <hr>
+        <div class="card-footer">
+            <p>Vous n'avez pas encore de compte? <a href="{{ route('auth.register') }}">Inscrivez-vous</a></p>
         </div>
     </div>
 @endsection

@@ -66,7 +66,11 @@
                 <div class="form-group">
                     <input type="submit" value="se connecter">
                 </div>
-        </form>
+            </form>
+        </div>
+        <hr>
+        <div class="card-footer">
+            <p>Vous avez deja un compte ? <a href="{{ route('auth.login') }}">Connectez-vous</a></p>
         </div>
     </div>
 @endsection
