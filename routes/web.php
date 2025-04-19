@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\AccountController;
+use App\Http\Controllers\CashReportController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +29,11 @@ Route::post('/register',[AuthController::class, 'doregister'])->name('auth.doreg
 
 
 # User routes
-Route::get('/user/home' , [HomeController::class,'index'])
-    ->name('user.home')
-    ->middleware('auth')
-;
+Route::middleware('auth')->group(function () {
+    Route::get('/user/home', [HomeController::class, 'index'])->name('user.home');
+    Route::get('/user/account/create', [AccountController::class, 'createForm'])->name('user.account.createForm');
+    Route::post('/user/account/create', [AccountController::class, 'create'])->name('user.account.create');
+    Route::get('/user/account/list', [AccountController::class, 'list'])->name('user.account.list');
+    Route::get('/user/account/{accountId}/cash-report/create', [CashReportController::class, 'createForm'])->name('cash_report.createForm');
+    Route::post('/user/account/{accountId}/cash-report/create', [CashReportController::class, 'create'])->name('cash_report.create');
+});

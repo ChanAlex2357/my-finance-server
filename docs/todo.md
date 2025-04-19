@@ -8,24 +8,84 @@
    2. [x] Metier
       1. [x] Modifier le fichier de configuration
 
-## [ ] Authentification
+## [x] Authentification
 
-- [ ] BDD
+- [x] BDD
   - [x] Cree la migration create users (2)
   - [x] modifier le fichier existant (2)
-  - [ ] cree la migration create user_profiles
-  - [ ] faire la migration
-- [ ] Affichage
-  - [ ] login
-    - [ ] route de login
-    - [ ] page de login
-    - [ ] gestion d'erreur
-  - [ ] register
-    - [ ] route de register
-    - [ ] page de register
-      - [ ] formulaire de user et son profile
-    - [ ] gestion d'erreur
-- [ ] Metier
+  - [x] cree la migration create user_profiles
+  - [x] faire la migration
+- [x] Affichage
+  - [x] login
+    - [x] route de login
+    - [x] page de login
+    - [x] gestion d'erreur
+  - [x] register
+    - [x] route de register
+    - [x] page de register
+      - [x] formulaire de user et son profile
+    - [x] gestion d'erreur
+- [x] Metier
   - [x] cree le model users (6)
-  - [ ] cree le model user_profile
-    - [ ] faire la liaison entre user_profiles et users
+  - [x] cree le model user_profile
+    - [x] faire la liaison entre user_profiles et users
+
+## [ ] Creation de caisse (Account)
+
+- [x] Creation Bank<!-- Type de caisse : mobile money , physique , caisse , tirelir , banque -->
+  - [x] generer le model et la migration
+  - [x] modifier la structure de la migration
+  - [x] modifier model
+    - [x] ajouter HasCustomId
+- [x] Creation currency
+  - [x] generer le model et la migration
+  - [x] modifier la structure de la migration
+  - [x] modifier model
+    - [x] ajouter HasCustomId
+- [x] Creation de account
+  - [x] generer le model et la migration
+  - [x] modifier la structure de la migration
+  - [x] modifier le model
+    - [x] ajouter HasCustomId
+    - [x] rajouter relations
+      - [x] currency
+      - [x] bank
+      - [x] user
+- [x] Creation de account_info
+  - [x] generer le moddel et la migration
+  - [x] modifier la migration
+  - [x] modifier le model
+    - [x] ajouter HasCustomId
+    - [x] rajouter relations
+      - [x] account
+- [x] Creation de cash_report
+  - [x] generer le model et la migration
+  - [x] modifier la migration
+  - [x] modifier le model
+    - [x] ajouter HasCustomId
+    - [x] rajouter les relations
+      - [x] account
+- [x] Insertion account
+  - [x] Affichage
+    - [x] Cree le controller
+      - [x] fonction get:createForm() -> formulaire de caisse
+    - [x] cree le router groupe user
+      - [x] createAccount
+    - [x] page formulaire d'insertion
+  - [x] Metier
+    - [x] requeteAccount -> validation rules
+      - [x] name required
+      - [x] id_bank , id_user , id_currency exists
+    - [x] controller
+      - [x] fonction post:create()
+        - [x] cree un nouveau account
+        - [x] cree un cash report avec montant de depart 0
+- [ ] List account
+  - [ ] BDD
+    - [ ] cree la vue etat_account
+  - [ ] Affichage
+    - [ ] controller
+      - [ ] index -> lister les casses de l'utilisateur
+        - [ ] recuperer les comptes de l'utilisateur avec
+    - [ ] router groupe user
+      - [ ] listAccount
