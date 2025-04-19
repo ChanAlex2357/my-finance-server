@@ -6,6 +6,9 @@
         <div class="card-body">
             <form action="{{ route('auth.doregister') }}" method="post" class="vstack gap-3">
                 @csrf
+                @error('error')
+                    {{ $message }}
+                @enderror
                 <div class="form-group">
                     <label for="email">Email</label>
                     <input type="email" name="email" id="email" class="form-control" value="{{ old('email') }}">
@@ -48,7 +51,7 @@
 
                 <div class="form-group">
                     <label for="salary">Salaire</label>
-                    <input type="number" step="0.1" value="0" min="0" name="salary" class="form-control" id="salary" value="{{ old('salary') }}">
+                    <input type="number" step="0.1" min="0" name="salary" class="form-control" id="salary" value="{{ old('salary',0) }}">
                     @error('salary')
                         {{ $message }}
                     @enderror
@@ -61,6 +64,9 @@
                             <option value="{{ $st->id }}">{{ $st->val}}</option>                            
                         @endforeach
                     </select>
+                    @error('professional_status')
+                        {{ $message }}
+                    @enderror
                 </div>
 
                 <div class="form-group">

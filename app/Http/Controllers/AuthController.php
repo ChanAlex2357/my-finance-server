@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\RegisterRequest;
 use App\Models\ProfessionalStatus;
 use App\Models\User;
 use App\Models\UserProfile;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
 
 class AuthController extends Controller
@@ -33,20 +35,39 @@ class AuthController extends Controller
         return view('auth.register',[ 'status'  => $status]);
     }
 
-
-    function doregister(Request $request){
-        $user = User::create([
-            'email' => $request->input('email'),
-            'password' => Hash::make($request->input('password'))
-        ]);
-
-        $user_profile = UserProfile::create([
-            'name' => $request->input('name'),
-            'last_name' => $request->input('last_name'),
-            'birth_date' => $request->input('birth_date'),
-            'salary' => $request->input('salary'),
-            'id_professional_status' => $request->input('professional_status'),
-            'id_user' => $user->id
-        ]);
+    function doregister(RegisterRequest $request)
+    {
+        $validated = $request->validated();
+    
+        DB::beginTransaction();
+    
+        try {
+            // Create user
+            $user = User::create([
+                'email' => $validated['email'],
+                'password' => Hash::make($validated['password']),
+            ]);
+    
+            // Create user profile
+            UserProfile::create([
+                'name' => $validated['name'],
+                'last_name' => $validated['last_name'],
+                'birth_date' => $validated['birth_date'],
+                'salary' => $validated['salary'],
+                'id_professional_status' => $validated['professional_status'],
+                'id_user' => $user->id,
+            ]);
+    
+            DB::commit();
+    
+            // Redirect or return success response
+            return redirect()->route('auth.login')->with('success', 'Inscription reussie');
+    
+        } catch (\Exception $e) {
+            DB::rollBack();
+            // Log the error or handle it
+            return back()->withErrors(['error' => 'Une erreur est survenue. Veuillez reessayer.']);
+        }
     }
+    
 }
