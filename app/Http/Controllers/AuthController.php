@@ -20,23 +20,14 @@ class AuthController extends Controller
     }
     function dologin(LoginRequest $request) {
         $credentials = $request->validated();
-        if(Auth::attempt($credentials)){
+        $remember = $request->has('remember');
+        if(Auth::attempt($credentials,$remember)){
             $request->session()->regenerate();
-
-            // Generate token for the logged-in user
-            $user = Auth::user();
-            $token = bin2hex(random_bytes(32)); // Generate a random token
-
-            // Save the token in the users table
-            $user->update(['token' => $token]);
-
-            // Return response with token
-            return redirect()->intended(route('user.home'))->with('token', $token);
+            return redirect()->intended(route('user.home'));
         }
-
-        return redirect()->route('auth.login')->withErrors([
-            'email' => "Email invalide ou Mode de passe incorecte"
-        ]);
+        return back()->withErrors([
+            'email' => 'Identifiants invalides',
+        ])->withInput();
     }
 
     function register() {

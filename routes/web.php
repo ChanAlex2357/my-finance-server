@@ -27,4 +27,7 @@ Route::post('/register',[AuthController::class, 'doregister'])->name('auth.doreg
 
 
 # User routes
-Route::get('/user/home' , [HomeController::class,'index'])->name('user.home');
+Route::get('/user/home' , [HomeController::class,'index'])
+    ->name('user.home')
+    ->middleware('auth')
+;
