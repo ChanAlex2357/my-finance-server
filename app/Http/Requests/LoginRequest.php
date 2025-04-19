@@ -28,4 +28,19 @@ class LoginRequest extends FormRequest
             'password' => 'required|min:4'
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array
+     */
+    public function messages()
+    {
+        return [
+            'email.required' => 'Le champ email ne peut pas etre vide',
+            'email.email' => 'L\'email doit avoir un format valide',
+            'password.required' => 'Le champ mot de passe ne peut pas etre vide',
+            'password.min' => 'Le mot de passe doit contenir au moins 4 character',
+        ];
+    }
 }
