@@ -43,4 +43,13 @@ class AccountController extends Controller
 
         return redirect()->route('user.home')->with('success', 'Compte créé avec succès.');
     }
+
+    public function list()
+    {
+        $accounts = Account::with(['bank', 'currency'])
+            ->where('id_user', auth()->id())
+            ->get();
+
+        return view('user.account.list', compact('accounts'));
+    }
 }

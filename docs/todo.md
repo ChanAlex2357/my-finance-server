@@ -65,21 +65,21 @@
     - [x] ajouter HasCustomId
     - [x] rajouter les relations
       - [x] account
-- [ ] Insertion account
-  - [ ] Affichage
-    - [ ] Cree le controller
-      - [ ] fonction get:createForm() -> formulaire de caisse
-    - [ ] cree le router groupe user
-      - [ ] createAccount
-    - [ ] page formulaire d'insertion
-  - [ ] Metier
-    - [ ] requeteAccount -> validation rules
-      - [ ] name required
-      - [ ] id_bank , id_user , id_currency exists
-    - [ ] controller
-      - [ ] fonction post:create()
-        - [ ] cree un nouveau account
-        - [ ] cree un cash report avec montant de depart 0
+- [x] Insertion account
+  - [x] Affichage
+    - [x] Cree le controller
+      - [x] fonction get:createForm() -> formulaire de caisse
+    - [x] cree le router groupe user
+      - [x] createAccount
+    - [x] page formulaire d'insertion
+  - [x] Metier
+    - [x] requeteAccount -> validation rules
+      - [x] name required
+      - [x] id_bank , id_user , id_currency exists
+    - [x] controller
+      - [x] fonction post:create()
+        - [x] cree un nouveau account
+        - [x] cree un cash report avec montant de depart 0
 - [ ] List account
   - [ ] BDD
     - [ ] cree la vue etat_account

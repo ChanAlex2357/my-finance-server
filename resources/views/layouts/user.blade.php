@@ -15,6 +15,9 @@
             <li>
                 <a href="{{ route('user.account.createForm') }}">Créer un compte</a>
             </li>
+            <li>
+                <a href="{{ route('user.account.list') }}">Mes comptes</a>
+            </li>
         </ul>
     </header>
 

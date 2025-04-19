@@ -32,4 +32,5 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/home', [HomeController::class, 'index'])->name('user.home');
     Route::get('/user/account/create', [AccountController::class, 'createForm'])->name('user.account.createForm');
     Route::post('/user/account/create', [AccountController::class, 'create'])->name('user.account.create');
+    Route::get('/user/account/list', [AccountController::class, 'list'])->name('user.account.list');
 });
