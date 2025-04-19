@@ -47,17 +47,6 @@ CREATE TABLE bank(
    PRIMARY KEY(id)
 );
 
-CREATE TABLE account_info(
-   id VARCHAR(255) ,
-   etablissement VARCHAR(255) ,
-   guichet_code VARCHAR(255) ,
-   account_num VARCHAR(255) ,
-   rib_key VARCHAR(255) ,
-   bic VARCHAR(255) ,
-   iban VARCHAR(255) ,
-   PRIMARY KEY(id)
-);
-
 CREATE TABLE budget_post(
    id VARCHAR(255) ,
    val VARCHAR(255)  NOT NULL,
@@ -118,12 +107,10 @@ CREATE TABLE account(
    name VARCHAR(255) ,
    description VARCHAR(255) ,
    is_active BOOLEAN,
-   id_info VARCHAR(255)  NOT NULL,
    id_bank VARCHAR(255)  NOT NULL,
    id_user VARCHAR(255)  NOT NULL,
    id_currency VARCHAR(255)  NOT NULL,
    PRIMARY KEY(id),
-   FOREIGN KEY(id_info) REFERENCES account_info(id),
    FOREIGN KEY(id_bank) REFERENCES bank(id),
    FOREIGN KEY(id_user) REFERENCES users(id),
    FOREIGN KEY(id_currency) REFERENCES currency(id)
@@ -131,12 +118,13 @@ CREATE TABLE account(
 
 CREATE TABLE cash_report(
    id VARCHAR(255) ,
-   report_date DATE NOT NULL,
-   report_amout NUMERIC(15,2)  ,
-   estimation_amount VARCHAR(255) ,
-   id_cash_register VARCHAR(255)  NOT NULL,
+   description VARCHAR(255) ,
+   report_date TIMESTAMP NOT NULL,
+   report_amout NUMERIC(15,2)   NOT NULL,
+   estimation_amount NUMERIC(15,2)  ,
+   id_account VARCHAR(255)  NOT NULL,
    PRIMARY KEY(id),
-   FOREIGN KEY(id_cash_register) REFERENCES account(id)
+   FOREIGN KEY(id_account) REFERENCES account(id)
 );
 
 CREATE TABLE category(
@@ -196,11 +184,36 @@ CREATE TABLE transfet(
    id VARCHAR(255) ,
    amount NUMERIC(15,2)   NOT NULL,
    status INTEGER NOT NULL,
+   transfert_date TIMESTAMP NOT NULL,
    id_receiver VARCHAR(255)  NOT NULL,
    id_sender VARCHAR(255)  NOT NULL,
    PRIMARY KEY(id),
    FOREIGN KEY(id_receiver) REFERENCES account(id),
    FOREIGN KEY(id_sender) REFERENCES account(id)
+);
+
+CREATE TABLE account_info(
+   id VARCHAR(255) ,
+   etablissement VARCHAR(255) ,
+   guichet_code VARCHAR(255) ,
+   account_num VARCHAR(255) ,
+   rib_key VARCHAR(255) ,
+   bic VARCHAR(255) ,
+   iban VARCHAR(255) ,
+   id_account VARCHAR(255)  NOT NULL,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_account) REFERENCES account(id)
+);
+
+CREATE TABLE deposit(
+   id VARCHAR(255) ,
+   amount NUMERIC(15,2)   NOT NULL,
+   deposit_date TIMESTAMP,
+   id_account VARCHAR(255)  NOT NULL,
+   id_user VARCHAR(255)  NOT NULL,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_account) REFERENCES account(id),
+   FOREIGN KEY(id_user) REFERENCES users(id)
 );
 
 CREATE TABLE expense(
@@ -224,10 +237,12 @@ CREATE TABLE transactions(
    entry NUMERIC(15,2)  ,
    exit NUMERIC(15,2)  ,
    mvt_date TIMESTAMP NOT NULL,
+   id_deposit VARCHAR(255) ,
    id_transfert VARCHAR(255) ,
    id_expense VARCHAR(255) ,
    id_account VARCHAR(255)  NOT NULL,
    PRIMARY KEY(id),
+   FOREIGN KEY(id_deposit) REFERENCES deposit(id),
    FOREIGN KEY(id_transfert) REFERENCES transfet(id),
    FOREIGN KEY(id_expense) REFERENCES expense(id),
    FOREIGN KEY(id_account) REFERENCES account(id)
