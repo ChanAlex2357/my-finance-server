@@ -10,6 +10,7 @@
                 <th>Actif</th>
                 <th>Banque</th>
                 <th>Devise</th>
+                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -19,6 +20,9 @@
                     <td>{{ $account->is_active ? 'Oui' : 'Non' }}</td>
                     <td>{{ $account->bank->name }}</td>
                     <td>{{ $account->currency->val }}</td>
+                    <td>
+                        <a href="{{ route('cash_report.createForm', $account->id) }}">Créer un Cash Report</a>
+                    </td>
                 </tr>
             @endforeach
         </tbody>
