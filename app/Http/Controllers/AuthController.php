@@ -22,7 +22,16 @@ class AuthController extends Controller
         $credentials = $request->validated();
         if(Auth::attempt($credentials)){
             $request->session()->regenerate();
-            return redirect()->intended(route('user.home'));
+
+            // Generate token for the logged-in user
+            $user = Auth::user();
+            $token = bin2hex(random_bytes(32)); // Generate a random token
+
+            // Save the token in the users table
+            $user->update(['token' => $token]);
+
+            // Return response with token
+            return redirect()->intended(route('user.home'))->with('token', $token);
         }
 
         return redirect()->route('auth.login')->withErrors([
