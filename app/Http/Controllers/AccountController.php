@@ -5,12 +5,18 @@ use App\Http\Requests\AccountRequest;
 use App\Models\Account;
 use App\Models\CashReport;
 use Illuminate\Http\Request;
+use App\Models\Currency;
+use App\Models\Bank;
 
 class AccountController extends Controller
 {
     public function createForm()
     {
-        return view('user.account.create');
+        // Retrieve all currencies and banks from the database
+        $currencies = Currency::all();
+        $banks = Bank::all();
+
+        return view('user.account.create', compact('currencies', 'banks'));
     }
 
     public function create(AccountRequest $request)

@@ -1,3 +1,4 @@
+<!-- filepath: d:\JACQUES Chan Alex\Finance-app\my-finance-server\resources\views\user\account\create.blade.php -->
 @extends('layouts.user')
 
 @section('content')
@@ -15,13 +16,17 @@
         <div>
             <label for="id_bank">Banque</label>
             <select id="id_bank" name="id_bank" required>
-                <!-- Populate with banks -->
+                @foreach ($banks as $bank)
+                    <option value="{{ $bank->id }}">{{ $bank->name }}</option>
+                @endforeach
             </select>
         </div>
         <div>
             <label for="id_currency">Devise</label>
             <select id="id_currency" name="id_currency" required>
-                <!-- Populate with currencies -->
+                @foreach ($currencies as $currency)
+                    <option value="{{ $currency->id }}">{{ $currency->val }}</option>
+                @endforeach
             </select>
         </div>
         <button type="submit">Créer</button>
