@@ -10,7 +10,10 @@
     <header>
         <ul>
             <li>
-                HOME
+                <a href="{{ route('user.home') }}">Accueil</a>
+            </li>
+            <li>
+                <a href="{{ route('user.account.createForm') }}">Créer un compte</a>
             </li>
         </ul>
     </header>
