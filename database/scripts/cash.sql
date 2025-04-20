@@ -21,20 +21,35 @@ CREATE TABLE currency(
    PRIMARY KEY(id)
 );
 
-CREATE TABLE mode(
+CREATE TABLE product(
    id VARCHAR(255) ,
-   val VARCHAR(255)  NOT NULL,
-   desce VARCHAR(255) ,
+   name VARCHAR(255)  NOT NULL,
+   ref_product VARCHAR(255)  NOT NULL,
+   img_url VARCHAR(255) ,
+   is_pushache BOOLEAN NOT NULL,
+   is_sale BOOLEAN NOT NULL,
    PRIMARY KEY(id)
 );
 
 CREATE TABLE supplier(
    id VARCHAR(255) ,
    name VARCHAR(255)  NOT NULL,
+   remarque VARCHAR(255) ,
    PRIMARY KEY(id)
 );
 
-CREATE TABLE product_tva(
+CREATE TABLE product_supplier(
+   id VARCHAR(255) ,
+   price NUMERIC(15,2)   NOT NULL,
+   price_date TIMESTAMP NOT NULL,
+   id_product VARCHAR(255)  NOT NULL,
+   id_supplier VARCHAR(255)  NOT NULL,
+   PRIMARY KEY(id),
+   FOREIGN KEY(id_product) REFERENCES product(id),
+   FOREIGN KEY(id_supplier) REFERENCES supplier(id)
+);
+
+CREATE TABLE tva_config(
    id VARCHAR(255) ,
    tva NUMERIC(15,2)   NOT NULL,
    tva_date TIMESTAMP NOT NULL,
@@ -71,11 +86,17 @@ CREATE TABLE unit(
 
 CREATE TABLE product_info(
    id VARCHAR(255) ,
+   longueur NUMERIC(15,2)  ,
+   largeur NUMERIC(15,2)  ,
+   epaisseur NUMERIC(15,2)  ,
+   poids NUMERIC(15,2)  ,
+   id_product VARCHAR(255)  NOT NULL,
    id_unit VARCHAR(255)  NOT NULL,
    id_tva VARCHAR(255)  NOT NULL,
    PRIMARY KEY(id),
+   FOREIGN KEY(id_product) REFERENCES product(id),
    FOREIGN KEY(id_unit) REFERENCES unit(id),
-   FOREIGN KEY(id_tva) REFERENCES product_tva(id)
+   FOREIGN KEY(id_tva) REFERENCES tva_config(id)
 );
 
 CREATE TABLE history(
@@ -145,19 +166,6 @@ CREATE TABLE post_config(
    FOREIGN KEY(id_post) REFERENCES budget_post(id)
 );
 
-CREATE TABLE product(
-   id VARCHAR(255) ,
-   name VARCHAR(255)  NOT NULL,
-   ref_product VARCHAR(255)  NOT NULL,
-   img_url VARCHAR(255) ,
-   purchasable BOOLEAN NOT NULL,
-   saleable BOOLEAN NOT NULL,
-   id_info VARCHAR(255)  NOT NULL,
-   PRIMARY KEY(id),
-   UNIQUE(id_info),
-   FOREIGN KEY(id_info) REFERENCES product_info(id)
-);
-
 CREATE TABLE contact(
    id VARCHAR(255) ,
    tel VARCHAR(255) ,
@@ -166,17 +174,6 @@ CREATE TABLE contact(
    id_supplier VARCHAR(255) ,
    PRIMARY KEY(id),
    FOREIGN KEY(id_user) REFERENCES user_profile(id),
-   FOREIGN KEY(id_supplier) REFERENCES supplier(id)
-);
-
-CREATE TABLE product_supplier(
-   id VARCHAR(255) ,
-   price NUMERIC(15,2)   NOT NULL,
-   price_date TIMESTAMP NOT NULL,
-   id_product VARCHAR(255)  NOT NULL,
-   id_supplier VARCHAR(255)  NOT NULL,
-   PRIMARY KEY(id),
-   FOREIGN KEY(id_product) REFERENCES product(id),
    FOREIGN KEY(id_supplier) REFERENCES supplier(id)
 );
 
@@ -223,12 +220,10 @@ CREATE TABLE expense(
    status INTEGER NOT NULL,
    id_user VARCHAR(255)  NOT NULL,
    id_assignment VARCHAR(255) ,
-   id_mode VARCHAR(255)  NOT NULL,
    id_category VARCHAR(255)  NOT NULL,
    PRIMARY KEY(id),
    FOREIGN KEY(id_user) REFERENCES users(id),
    FOREIGN KEY(id_assignment) REFERENCES assignment(id),
-   FOREIGN KEY(id_mode) REFERENCES mode(id),
    FOREIGN KEY(id_category) REFERENCES category(id)
 );
 
@@ -237,6 +232,7 @@ CREATE TABLE transactions(
    entry NUMERIC(15,2)  ,
    exit NUMERIC(15,2)  ,
    mvt_date TIMESTAMP NOT NULL,
+   description VARCHAR(255)  NOT NULL,
    id_deposit VARCHAR(255) ,
    id_transfert VARCHAR(255) ,
    id_expense VARCHAR(255) ,
