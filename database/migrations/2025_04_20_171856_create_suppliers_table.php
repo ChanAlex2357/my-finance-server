@@ -15,7 +15,13 @@ class CreateSuppliersTable extends Migration
     {
         Schema::create('suppliers', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
+            $table->string('description')->nullable();
+            $table->string('id_type');
             $table->timestamps();
+            $table->softDeletes(); // Add deleted_at column
+
+            $table->foreign('id_type')->references('id')->on('supplier_types')->onDelete('cascade');
         });
     }
 
